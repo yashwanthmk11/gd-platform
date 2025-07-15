@@ -18,11 +18,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/join" element={<JoinRoom />} />
-        <Route path="/voice/:roomId" element={<VoiceRoom />} />
+        <Route path="/voice/:joincode" element={<VoiceRoom />} /> {/* ✅ Corrected */}
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/create-session" element={<CreateSession />} />
-
-        {/* Fallback for unknown routes */}
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

@@ -29,15 +29,16 @@ router.post("/", async (req, res) => {
   }
 });
 // GET /api/feedback - Get all feedbacks
-router.get("/", async (req, res) => {
+// /routes/feedback.js
+router.get("/latest", async (req, res) => {
   try {
-    const feedbacks = await FeedbackModel.find().sort({ createdAt: -1 });
-    res.json(feedbacks);
-  } catch (err) {
-    console.error("🔥 Failed to fetch feedbacks:", err.message);
-    res.status(500).json({ error: "Failed to fetch feedbacks" });
+    const latest = await Feedback.findOne().sort({ createdAt: -1 }).limit(1);
+    res.json(latest);
+  } catch {
+    res.status(500).json({ feedback: "AI feedback not found." });
   }
 });
+
 
 
 export default router;
