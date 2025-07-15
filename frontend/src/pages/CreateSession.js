@@ -33,7 +33,7 @@ const CreateSession = () => {
     console.log("✅ User ID:", user._id);
 
     try {
-      const res = await axios.post("/api/sessions", {
+      const res = await axios.post("https://gd-platform-3.onrender.com/api/sessions", {
         topic,
         aiCount: Number(aiCount),
         humanCount: Number(humanCount),

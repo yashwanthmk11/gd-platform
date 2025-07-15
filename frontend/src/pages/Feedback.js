@@ -13,7 +13,7 @@ const Feedback = () => {
     setFeedback("");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/feedback", {
+      const res = await axios.post("https://gd-platform-3.onrender.com/api/feedback", {
         transcript,
         // sessionid : currentSessionId, 
       });

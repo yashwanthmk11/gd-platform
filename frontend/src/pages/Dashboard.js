@@ -12,7 +12,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
-        const res = await axios.get("/api/feedback");
+        const res = await axios.get("https://gd-platform-3.onrender.com/api/feedback");
         setFeedbacks(res.data);
       } catch (err) {
         console.error("Failed to fetch feedbacks");

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 import "./VoiceRoom.css"; // make sure this CSS exists
-const socket = io("http://localhost:5000"); // ✅ Replace with your server if deployed
+const socket = io("https://gd-platform-3.onrender.com"); // ✅ Replace with your server if deployed
 
 function VoiceRoom() {
   const { roomId } = useParams();
