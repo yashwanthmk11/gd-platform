@@ -1,0 +1,70 @@
+.voice-room-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.room-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.room-header h2 {
+  font-size: 2rem;
+  color: #1f2937;
+}
+
+.room-id {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.participants-section {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.user-tile {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 1rem 2rem;
+  font-size: 16px;
+  color: #111827;
+}
+
+.controls-section {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.mute-btn,
+.leave-btn {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.leave-btn {
+  background-color: #ef4444;
+}
+
+.mute-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.leave-btn:hover {
+  background-color: #dc2626;
+}
