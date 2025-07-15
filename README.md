@@ -42,6 +42,17 @@ A MERN stack project built for AI-integrated real-time group discussions with sp
 - Socket.IO
 
 ---
+## 🧠 AI API Usage
+
+We integrated OpenAI's GPT API to generate smart feedback for group discussion sessions.
+
+- **API Used**: `gpt-3.5-turbo`
+- **Endpoint**: POST `/api/feedback`
+- **Prompt Includes**: Topic + Transcript of the GD
+- **Output**: Summary and improvement suggestions
+
+⚠️ Note: If no OpenAI key is set, the feedback may not generate. Add your API key in the `.env` file under:
+----
 
 ## 📁 Folder Structure
 
