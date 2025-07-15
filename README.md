@@ -1,7 +1,6 @@
 ✅ README.md for GD Platform Assignment
-markdown
-Copy
-Edit
+
+
 # 🧠 Group Discussion (GD) Platform - AI Integrated
 
 A MERN stack project built for AI-integrated real-time group discussions with speech features and feedback generation.
@@ -59,9 +58,7 @@ gd-platform/
 │ ├── index.js
 │ └── .env
 
-yaml
-Copy
-Edit
+
 
 ---
 
@@ -74,30 +71,21 @@ git clone https://github.com/yashwanthmk11/gd-platform.git
 cd gd-platform
 2. Environment Variables
 🔐 Backend .env
-env
-Copy
-Edit
+
 MONGO_URI=your_mongodb_connection
 JWT_SECRET=your_jwt_secret
 OPENAI_API_KEY=your_openai_key
 PORT=5000
 🌐 Frontend .env (client/.env or frontend/.env)
-env
-Copy
-Edit
+
 REACT_APP_API_BASE_URL=https://gd-platform-3.onrender.com
 ▶️ Run Locally
 Backend
-bash
-Copy
-Edit
 cd server
 npm install
 npm run dev
+
 Frontend
-bash
-Copy
-Edit
 cd client # or frontend
 npm install
 npm start
@@ -126,9 +114,6 @@ Yashwanth M K
 📄 License
 This project is for academic/assignment use and is not intended for production.
 
-yaml
-Copy
-Edit
 
 ---
 
