@@ -86,7 +86,7 @@ npm install
 npm run dev
 
 Frontend
-cd client # or frontend
+cd  frontend
 npm install
 npm start
 🧪 Test the Flow
