@@ -1,4 +1,4 @@
-✅ README.md for GD Platform Assignment
+✅ README.md 
 
 
 # 🧠 Group Discussion (GD) Platform - AI Integrated
@@ -119,7 +119,7 @@ This project is for academic/assignment use and is not intended for production.
 
 Let me know if you'd like a **PDF version**, or help **uploading this to GitHub** and **verifying links/images**.
 
-2/2
+
 
 
 
