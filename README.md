@@ -78,7 +78,7 @@ gd-platform/
 
 ### 1. Clone the Repo
 
-```bash
+```
 git clone https://github.com/yashwanthmk11/gd-platform.git
 cd gd-platform
 2. Environment Variables
@@ -126,10 +126,6 @@ Yashwanth M K
 📄 License
 This project is for academic/assignment use and is not intended for production.
 
-
----
-
-Let me know if you'd like a **PDF version**, or help **uploading this to GitHub** and **verifying links/images**.
 
 
 
