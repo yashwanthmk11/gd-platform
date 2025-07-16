@@ -3,13 +3,13 @@
 
 # 🧠 Group Discussion (GD) Platform - AI Integrated
 
-A MERN stack project built for AI-integrated real-time group discussions with speech features and feedback generation.
+An AI-integrated MERN stack platform where users can create or join real-time voice-based or video-based group discussions, interact with peers, and receive automated AI-generated feedback.
 
 ---
 
 ## 🚀 Live Demo
 
-- **Frontend (Vercel)**: [https://groupdiscussion.vercel.app](https://groupdiscussion.vercel.app)
+- **Frontend (Vercel)**: [https://groupdiscussion.vercel.app](https://gd-platform.vercel.app/)
 - **Backend (Render)**: [https://gd-platform-3.onrender.com](https://gd-platform-3.onrender.com)
 
 ---
@@ -18,7 +18,7 @@ A MERN stack project built for AI-integrated real-time group discussions with sp
 
 ✅ User Authentication  
 ✅ Create & Join GD Rooms  
-✅ Real-Time Audio Communication (Socket.IO + WebRTC)  
+✅ Real-Time Audio/Video  Communication (Socket.IO + WebRTC)  
 ✅ AI Participant Integration  
 ✅ AI Feedback Summary for GD Sessions  
 ✅ Session Scheduling with Join Codes  
@@ -33,6 +33,7 @@ A MERN stack project built for AI-integrated real-time group discussions with sp
 - React Router DOM
 - Axios
 - WebRTC + Socket.IO Client
+- HTML2Canvas + jsPDF for PDF export
 
 ### Backend
 - Node.js
