@@ -4,7 +4,8 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import JoinRoom from "./pages/JoinRoom";
-import VoiceRoom from "./pages/VoiceRoom";
+import VoiceRoom from "./pages/VideoRoom"; // ✅ Corrected import name
+import "./App.css"; // Ensure this file exists for styling
 import Feedback from "./pages/Feedback";
 import CreateSession from "./pages/CreateSession";
 import Home from "./pages/Home";

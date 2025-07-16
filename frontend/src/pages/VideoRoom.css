@@ -68,3 +68,15 @@
 .leave-btn:hover {
   background-color: #dc2626;
 }
+.voice-room-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.video-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}

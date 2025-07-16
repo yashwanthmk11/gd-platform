@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 import Peer from "simple-peer";
-import "./VoiceRoom.css";
+import "./VideoRoom.css";
 import axios from "axios";
 
 const socket = io("https://gd-platform-3.onrender.com");
@@ -12,20 +12,20 @@ function VoiceRoom() {
   const [peers, setPeers] = useState([]);
   const [feedbackPopup, setFeedbackPopup] = useState(false);
   const [feedbackText, setFeedbackText] = useState("");
-  const userAudio = useRef();
+  const userVideo = useRef(); // changed from audio to video
   const peersRef = useRef([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      alert("Your browser doesn't support audio or permissions are blocked.");
+      alert("Your browser doesn't support video/audio or permissions are blocked.");
       return;
     }
 
     navigator.mediaDevices
-      .getUserMedia({ video: false, audio: true })
+      .getUserMedia({ video: true, audio: true })
       .then((stream) => {
-        userAudio.current.srcObject = stream;
+        userVideo.current.srcObject = stream;
 
         socket.emit("join-room", joincode);
 
@@ -47,8 +47,8 @@ function VoiceRoom() {
         });
       })
       .catch((err) => {
-        console.error("Mic access error:", err);
-        alert("Mic access is required. Please allow microphone permission.");
+        console.error("Mic/Camera access error:", err);
+        alert("Mic & camera access are required. Please allow permission.");
       });
 
     return () => {
@@ -56,12 +56,10 @@ function VoiceRoom() {
     };
   }, [joincode]);
 
-  // ✅ Handle exit
   const handleExit = async () => {
     peersRef.current.forEach(({ peer }) => peer.destroy());
     socket.disconnect();
 
-    // Optionally call backend AI feedback API
     try {
       const res = await axios.get("https://gd-platform-3.onrender.com/api/feedback/latest");
       setFeedbackText(res.data?.feedback || "Thanks for participating!");
@@ -71,7 +69,6 @@ function VoiceRoom() {
 
     setFeedbackPopup(true);
 
-    // Redirect after 4 seconds
     setTimeout(() => {
       navigate("/dashboard");
     }, 4000);
@@ -108,7 +105,7 @@ function VoiceRoom() {
 
   return (
     <div className="voice-room-container">
-      <h2>🗣️ Group Discussion Room: {joincode}</h2>
+      <h2>🎥 Group Discussion Room: {joincode}</h2>
 
       <button
         onClick={handleExit}
@@ -125,12 +122,17 @@ function VoiceRoom() {
         🚪 Exit Session
       </button>
 
-      <audio ref={userAudio} autoPlay muted />
-      {peers.map((peer, index) => (
-        <PeerAudio key={index} peer={peer} />
-      ))}
+      {/* Your own video */}
+      <video ref={userVideo} autoPlay muted playsInline style={{ width: "300px", borderRadius: "10px" }} />
 
-      {/* ✅ Feedback Modal */}
+      {/* Peers */}
+      <div className="video-grid">
+        {peers.map((peer, index) => (
+          <PeerVideo key={index} peer={peer} />
+        ))}
+      </div>
+
+      {/* AI Feedback Popup */}
       {feedbackPopup && (
         <div
           style={{
@@ -158,7 +160,7 @@ function VoiceRoom() {
   );
 }
 
-function PeerAudio({ peer }) {
+function PeerVideo({ peer }) {
   const ref = useRef();
 
   useEffect(() => {
@@ -167,7 +169,14 @@ function PeerAudio({ peer }) {
     });
   }, [peer]);
 
-  return <audio ref={ref} autoPlay />;
+  return (
+    <video
+      ref={ref}
+      autoPlay
+      playsInline
+      style={{ width: "300px", borderRadius: "10px", margin: "10px" }}
+    />
+  );
 }
 
 export default VoiceRoom;
