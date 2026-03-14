@@ -1,4 +1,3 @@
-✅ README.md 
 
 
 # 🧠 Group Discussion (GD) Platform - AI Integrated
