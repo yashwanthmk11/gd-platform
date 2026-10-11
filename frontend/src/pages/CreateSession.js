@@ -1,99 +1,130 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "./CreateSession.css"; // make sure this CSS exists
+import { useNavigate, Link } from "react-router-dom";
+import api from "../api/config";
+import "./CreateSession.css";
 
-const CreateSession = () => {
+export default function CreateSession() {
   const navigate = useNavigate();
   const [topic, setTopic] = useState("");
-  const [aiCount, setAiCount] = useState(1);
-  const [humanCount, setHumanCount] = useState(1);
-  const [scheduledAt, setScheduledAt] = useState(new Date().toISOString().slice(0, 16));
-   // pre-filled with current datetime
-  
+  const [aiCount, setAiCount] = useState(2);
+  const [humanCount, setHumanCount] = useState(4);
+  const [scheduledAt, setScheduledAt] = useState(() =>
+    new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16)
+  );
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [created, setCreated] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const userRaw = localStorage.getItem("user");
-    console.log("🧠 Raw user from localStorage:", userRaw);
-
-    let user;
-    try {
-      user = JSON.parse(userRaw);
-    } catch (err) {
-      alert("❌ Failed to parse user data. Please log in again.");
-      return;
-    }
-
-    if (!user || !user._id) {
-      alert("⚠️ User not found. Please log in again.");
-      return;
-    }
-
-    console.log("✅ User ID:", user._id);
+    setError("");
+    setLoading(true);
 
     try {
-      const res = await axios.post("https://gd-platform-3.onrender.com/api/sessions", {
+      const res = await api.post("/api/sessions", {
         topic,
         aiCount: Number(aiCount),
         humanCount: Number(humanCount),
-        createdBy: user._id,
         scheduledAt,
       });
-
-      alert("✅ Session Created!");
-      navigate(`/voice/${res.data.joinCode}`);
+      setCreated(res.data);
     } catch (err) {
-      console.error("❌ Session creation failed:", err);
-      alert("Session creation failed");
+      setError(err.response?.data?.error || "Session creation failed");
+    } finally {
+      setLoading(false);
     }
   };
 
+  const copyCode = async () => {
+    if (!created?.joinCode) return;
+    try {
+      await navigator.clipboard.writeText(created.joinCode);
+    } catch {
+      // ignore
+    }
+  };
+
+  if (created) {
+    return (
+      <div className="page page-narrow create-page">
+        <div className="panel create-card success-card">
+          <p className="eyebrow">Session ready</p>
+          <h1>Share this join code</h1>
+          <p className="page-sub">{created.topic}</p>
+          <div className="join-code-display">{created.joinCode}</div>
+          <div className="create-actions">
+            <button type="button" className="btn btn-ghost" onClick={copyCode}>
+              Copy code
+            </button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => navigate(`/voice/${created.joinCode}`)}
+            >
+              Enter room
+            </button>
+          </div>
+          <Link className="back-link" to="/dashboard">
+            Back to dashboard
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="create-session-container">
-      <div className="create-session-card">
-        <h2>Create GD Session</h2>
-        <form onSubmit={handleSubmit}>
-          <label>Topic</label>
-          <input
-            type="text"
-            placeholder="E.g., Climate Change"
-            value={topic}
-            onChange={(e) => setTopic(e.target.value)}
-            required
-          />
-
-          <label>Number of AI Participants</label>
-          <input
-            type="number"
-            value={aiCount}
-            min="0"
-            max="4"
-            onChange={(e) => setAiCount(e.target.value)}
-          />
-
-          <label>Number of Human Participants</label>
-          <input
-            type="number"
-            value={humanCount}
-            min="1"
-            max="4"
-            onChange={(e) => setHumanCount(e.target.value)}
-          />
-
-          <label>Schedule Time</label>
-          <input
-            type="datetime-local"
-            value={scheduledAt}
-            onChange={(e) => setScheduledAt(e.target.value)}
-            required
-          />
-
-          <button type="submit">Create Session</button>
+    <div className="page page-narrow create-page">
+      <div className="panel create-card">
+        <p className="eyebrow">Host</p>
+        <h1>Create a GD session</h1>
+        <p className="page-sub">Set the topic, room size, and coaching prompts for your group.</p>
+        <form className="form-stack" onSubmit={handleSubmit}>
+          {error && <p className="form-error">{error}</p>}
+          <label>
+            Topic
+            <input
+              type="text"
+              placeholder="e.g. Should remote work be the default?"
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Coaching prompts
+            <input
+              type="number"
+              min="0"
+              max="4"
+              value={aiCount}
+              onChange={(e) => setAiCount(e.target.value)}
+            />
+            <span className="field-hint">AI discussion cues shown in the room (0–4).</span>
+          </label>
+          <label>
+            Max participants
+            <input
+              type="number"
+              min="1"
+              max="8"
+              value={humanCount}
+              onChange={(e) => setHumanCount(e.target.value)}
+            />
+          </label>
+          <label>
+            Schedule
+            <input
+              type="datetime-local"
+              value={scheduledAt}
+              onChange={(e) => setScheduledAt(e.target.value)}
+              required
+            />
+          </label>
+          <button className="btn btn-primary btn-block" type="submit" disabled={loading}>
+            {loading ? "Creating…" : "Create session"}
+          </button>
         </form>
       </div>
     </div>
   );
-};
-
-export default CreateSession;
+}

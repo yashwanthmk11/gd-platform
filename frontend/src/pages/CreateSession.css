@@ -1,59 +1,47 @@
-.create-session-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f3f4f6;
-  padding: 2rem;
+.create-page {
+  animation: fade-up 0.55s ease both;
 }
 
-.create-session-card {
-  background: white;
-  padding: 2rem;
-  width: 100%;
-  max-width: 500px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+.create-card {
+  padding: 1.75rem 1.5rem 1.6rem;
 }
 
-.create-session-card h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #1f2937;
+.create-card h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.85rem;
 }
 
-.create-session-card form {
-  display: flex;
-  flex-direction: column;
-}
-
-.create-session-card label {
-  margin-top: 1rem;
-  margin-bottom: 0.3rem;
+.field-hint {
   font-weight: 500;
-  color: #374151;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
 }
 
-.create-session-card input {
-  padding: 10px 14px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 14px;
+.join-code-display {
+  margin: 0.5rem 0 1.25rem;
+  padding: 1rem;
+  text-align: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--brand-deep);
+  background: var(--brand-soft);
+  border-radius: var(--radius-sm);
 }
 
-.create-session-card button {
-  margin-top: 1.5rem;
-  background-color: #2563eb;
-  color: white;
-  padding: 10px;
-  font-size: 15px;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+.create-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
 }
 
-.create-session-card button:hover {
-  background-color: #1d4ed8;
+.back-link {
+  display: inline-block;
+  margin-top: 1.1rem;
+  font-weight: 700;
+}
+
+.success-card .page-sub {
+  margin-bottom: 0.75rem;
 }

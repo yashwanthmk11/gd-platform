@@ -1,139 +1,119 @@
+# Podium — Group Discussion Practice Platform
 
+Practice real group discussions with live video rooms, join codes, and AI coaching feedback.
 
-# 🧠 Group Discussion (GD) Platform - AI Integrated
+**Live**
 
-An AI-integrated MERN stack platform where users can create or join real-time voice-based or video-based group discussions, interact with peers, and receive automated AI-generated feedback.
-
----
-
-## 🚀 Live Demo
-
-- **Frontend (Vercel)**: [https://groupdiscussion.vercel.app](https://gd-platform.vercel.app/)
-- **Backend (Render)**: [https://gd-platform-3.onrender.com](https://gd-platform-3.onrender.com)
+- Frontend: [https://gd-platform.vercel.app](https://gd-platform.vercel.app/)
+- Backend: [https://gd-platform-3.onrender.com](https://gd-platform-3.onrender.com)
 
 ---
 
-## 📌 Features
+## Features
 
-✅ User Authentication  
-✅ Create & Join GD Rooms  
-✅ Real-Time Audio/Video  Communication (Socket.IO + WebRTC)  
-✅ AI Participant Integration  
-✅ AI Feedback Summary for GD Sessions  
-✅ Session Scheduling with Join Codes  
-✅ Dashboard to Track GD History  
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-- React.js
-- React Router DOM
-- Axios
-- WebRTC + Socket.IO Client
-- HTML2Canvas + jsPDF for PDF export
-
-### Backend
-- Node.js
-- Express.js
-- MongoDB + Mongoose
-- OpenAI API (for AI Feedback)
-- Socket.IO
-
----
-## 🧠 AI API Usage
-
-We integrated OpenAI's GPT API to generate smart feedback for group discussion sessions.
-
-- **API Used**: `gpt-3.5-turbo`
-- **Endpoint**: POST `/api/feedback`
-- **Prompt Includes**: Topic + Transcript of the GD
-- **Output**: Summary and improvement suggestions
-
-⚠️ Note: If no OpenAI key is set, the feedback may not generate. Add your API key in the `.env` file under:
-----
-
-## 📁 Folder Structure
-
-gd-platform/
-├── client/ # React frontend (renamed to frontend)
-│ ├── public/
-│ └── src/
-│ ├── pages/
-│ ├── components/
-│ └── App.js
-├── server/ # Node.js backend
-│ ├── routes/
-│ ├── models/
-│ ├── index.js
-│ └── .env
-
-
+- User authentication (JWT)
+- Create & join GD rooms with 6-character codes
+- Real-time audio/video (Socket.IO + WebRTC)
+- Discussion coaching prompts in-room
+- AI feedback from session transcripts (OpenAI when configured)
+- Dashboard with session history, feedback archive, and PDF export
 
 ---
 
-## ⚙️ Setup Instructions
+## Tech stack
 
-### 1. Clone the Repo
+| Layer | Stack |
+|-------|--------|
+| Frontend | React, React Router, Axios, Socket.IO Client, simple-peer, html2canvas + jsPDF |
+| Backend | Node.js, Express, MongoDB/Mongoose, JWT, Socket.IO, OpenAI |
+| Deploy | Vercel (frontend), Render (API), MongoDB Atlas |
+
+---
+
+## Folder structure
 
 ```
+gd-platform/
+├── frontend/          # React app
+│   ├── public/
+│   └── src/
+│       ├── api/
+│       ├── components/
+│       ├── context/
+│       └── pages/
+└── server/            # Express API + Socket.IO
+    ├── middleware/
+    ├── models/
+    ├── routes/
+    └── index.js
+```
+
+---
+
+## Setup
+
+### 1. Clone
+
+```bash
 git clone https://github.com/yashwanthmk11/gd-platform.git
 cd gd-platform
-2. Environment Variables
-🔐 Backend .env
+```
 
+### 2. Backend env (`server/.env`)
+
+```env
 MONGO_URI=your_mongodb_connection
 JWT_SECRET=your_jwt_secret
 OPENAI_API_KEY=your_openai_key
 PORT=5000
-🌐 Frontend .env (client/.env or frontend/.env)
+```
 
-REACT_APP_API_BASE_URL=https://gd-platform-3.onrender.com
-▶️ Run Locally
-Backend
+Copy from `server/.env.example` if needed. Without `OPENAI_API_KEY`, feedback still works using a built-in coaching heuristic.
+
+### 3. Frontend env (`frontend/.env`)
+
+```env
+REACT_APP_API_BASE_URL=http://localhost:5000
+```
+
+For production builds, point this at your Render API URL.
+
+### 4. Run locally
+
+```bash
+# Terminal 1 — API
 cd server
 npm install
 npm run dev
 
-Frontend
-cd  frontend
+# Terminal 2 — React
+cd frontend
 npm install
 npm start
-🧪 Test the Flow
-Register/Login
+```
 
-Create GD Session — /create-session
+Or from the repo root after `npm run install:all`:
 
-Join Room — /voice/:joinCode
+```bash
+npm run dev:server
+npm run dev:frontend
+```
 
-View AI Feedback — /feedback
+---
 
-🌍 Deployment
-Frontend deployed to Vercel
+## Typical flow
 
-Backend deployed to Render
+1. Register / log in  
+2. **Create session** → copy join code  
+3. Peers **Join** with the code → `/voice/:joinCode`  
+4. Leave the room → paste transcript on **Feedback**  
+5. Review history and export PDF from the **Dashboard**
 
-MongoDB Atlas used for data storage
+---
 
-🙋‍♂️ Author
-Yashwanth M K
-📧 mkyashwanth3@gmail.com
-🔗 LinkedIn
+## Author
 
+**Yashwanth M K**  
+Email: mkyashwanth3@gmail.com  
 
-📄 License
-This project is for academic/assignment use and is not intended for production.
-
-
-
-
-
-
-
-
-
-
-
-
-
+This project is for academic use and is not intended as a production service.
